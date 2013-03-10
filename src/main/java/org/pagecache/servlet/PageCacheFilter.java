@@ -42,7 +42,7 @@ public class PageCacheFilter implements Filter {
 				String requestUri = httpRequest.getRequestURI();
 				String urlPattern = UrlKeyMatcher.getMatchUrlPattern(requestUri);
 				if(urlPattern != null){
-					String urlKey = UrlKeyCreator.getUrlKey(requestUri, httpRequest.getParameterMap());
+					String urlKey = UrlKeyCreator.getUrlKey(requestUri, urlPattern, httpRequest.getParameterMap());
 					String pageContent = cacheStore.get(urlKey);
 					if(pageContent != null){
 						httpResponse.getWriter().write(pageContent);
@@ -50,7 +50,7 @@ public class PageCacheFilter implements Filter {
 					}
 					PageCacheHttpServletResponse pageCacheResponse = new PageCacheHttpServletResponse(httpResponse);
 					filterChain.doFilter(request, pageCacheResponse);
-					cacheStore.put(urlKey, pageCacheResponse.getPageContent());
+					cacheStore.put(urlKey, pageCacheResponse.getPageContent(), urlPattern);
 					return ;
 				}
 	
@@ -101,23 +101,29 @@ public class PageCacheFilter implements Filter {
 			String includeParams, String excludeParams) {
 		String[] urlPatterns = urlPattern.split(",");
 		String[] cacheExpireTimes = cacheExpireTime.split(",");
-		String[] includeParamList = includeParams.split(";");
-		String[] excludeParamList = excludeParams.split(";");
 		Map<String, Integer> urlCacheTime = new HashMap<String, Integer>();
-		Map<String, List<String>> urlIncludeParams = new HashMap<String, List<String>>();
-		Map<String, List<String>> urlExcludeParams = new HashMap<String, List<String>>();
 		for (int i = 0; i < urlPatterns.length; i++) {
 			urlCacheTime.put(urlPatterns[i],
 					Integer.valueOf(cacheExpireTimes[i]));
-			urlIncludeParams.put(urlPatterns[i],
-					Arrays.asList(includeParamList[i].split(",")));
-			urlExcludeParams.put(urlPatterns[i],
-					Arrays.asList(excludeParamList[i].split(",")));
 		}
 		PageCacheGlobalConfig.setUrlPattern(Arrays.asList(urlPatterns));
 		PageCacheGlobalConfig.setUrlCacheTime(urlCacheTime);
-		PageCacheGlobalConfig.setUrlIncludeParams(urlIncludeParams);
-		PageCacheGlobalConfig.setUrlExcludeParams(urlExcludeParams);
+		PageCacheGlobalConfig.setUrlIncludeParams(initUrlParams(urlPatterns,includeParams));
+		PageCacheGlobalConfig.setUrlExcludeParams(initUrlParams(urlPatterns,excludeParams));
+	}
+	
+	private Map<String, List<String>> initUrlParams(String[] urlPatterns, String params){
+		if(params == null || params.isEmpty()){
+			return null;
+		}
+		String[] paramList = params.split(";");
+		Map<String, Integer> urlCacheTime = new HashMap<String, Integer>();
+		Map<String, List<String>> urlParams = new HashMap<String, List<String>>();
+		for (int i = 0; i < urlPatterns.length; i++) {
+			urlParams.put(urlPatterns[i],
+					Arrays.asList(paramList[i].split(",")));
+		}
+		return urlParams;
 	}
 
 }

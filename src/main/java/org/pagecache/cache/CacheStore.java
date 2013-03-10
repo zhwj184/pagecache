@@ -6,7 +6,7 @@ public interface CacheStore {
 	
 	public void init(Map<String,String> initParams);
 	
-	public void put(String key, String value);
+	public void put(String key, String value, String urlPattern);
 	
 	public String get(String key);
 

@@ -19,9 +19,9 @@ public class SimpleLRUCacheStore implements CacheStore {
 	public void init(int cacheSize) {
 		this.cacheSize = cacheSize;
 		urlKeyPageCache = new LruCache<String, PageContentModel>(this.cacheSize);
-		Thread thread = new Thread(new ExpirePageCheckTread());
-		thread.setName("ExpirePageCheckTread");
-		thread.start();
+//		Thread thread = new Thread(new ExpirePageCheckTread());
+//		thread.setName("ExpirePageCheckTread");
+//		thread.start();
 	}
 
 
@@ -32,10 +32,11 @@ public class SimpleLRUCacheStore implements CacheStore {
 	}
 	
 	@Override
-	public void put(String key, String value) {
+	public void put(String key, String value, String urlPattern) {
 		PageContentModel model = new PageContentModel();
 		model.setPageContent(value);
 		model.setLastModified(System.currentTimeMillis());
+		model.setCacheTime(PageCacheGlobalConfig.getCacheExpiredTime(urlPattern));
 		urlKeyPageCache.put(key, model);
 	}
 
@@ -43,6 +44,10 @@ public class SimpleLRUCacheStore implements CacheStore {
 	public String get(String key) {
 		PageContentModel model = urlKeyPageCache.get(key);
 		if (model != null) {
+			if(System.currentTimeMillis() - model.getLastModified() > model.getCacheTime() * 1000){
+				urlKeyPageCache.remove(key);
+				return null;
+			}
 			return model.getPageContent();
 		}
 		return null;
@@ -57,7 +62,7 @@ public class SimpleLRUCacheStore implements CacheStore {
 				Iterator<Entry<String, PageContentModel>> iter =  tmpUrlPageMap.entrySet().iterator();
 				while(iter.hasNext()){
 					Entry<String, PageContentModel> entry = iter.next();
-					if(System.currentTimeMillis() - entry.getValue().getLastModified() > PageCacheGlobalConfig.getCacheExpiredTime(entry.getKey())){
+					if(System.currentTimeMillis() - entry.getValue().getLastModified() > entry.getValue().getCacheTime() * 1000){
 						tmpUrlPageMap.remove(entry.getKey());
 					}
 				}

@@ -11,7 +11,7 @@ public class MemCacheStore implements CacheStore{
 	}
 	
 	@Override
-	public void put(String key, String value) {
+	public void put(String key, String value, String urlPattern) {
 		// TODO Auto-generated method stub
 		
 	}

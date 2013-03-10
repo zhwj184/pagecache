@@ -41,6 +41,9 @@ public class PageCacheGlobalConfig {
 	}
 
 	public static void setUrlCacheTime(Map<String, Integer> urlCacheTime) {
+		if(urlCacheTime == null){
+			return ;
+		}
 		PageCacheGlobalConfig.urlCacheTime = urlCacheTime;
 	}
 
@@ -49,6 +52,9 @@ public class PageCacheGlobalConfig {
 	}
 
 	public static void setUrlIncludeParams(Map<String, List<String>> urlIncludeParams) {
+		if(urlIncludeParams == null){
+			return ;
+		}
 		PageCacheGlobalConfig.urlIncludeParams = urlIncludeParams;
 	}
 
@@ -57,6 +63,9 @@ public class PageCacheGlobalConfig {
 	}
 
 	public static void setUrlExcludeParams(Map<String, List<String>> urlExcludeParams) {
+		if(urlExcludeParams == null){
+			return ;
+		}
 		PageCacheGlobalConfig.urlExcludeParams = urlExcludeParams;
 	}
 }

@@ -5,6 +5,8 @@ public class PageContentModel {
 	private String pageContent;
 	
 	private long lastModified;
+	
+	private long cacheTime;
 
 	public String getPageContent() {
 		return pageContent;
@@ -20,5 +22,13 @@ public class PageContentModel {
 
 	public void setLastModified(long lastModified) {
 		this.lastModified = lastModified;
+	}
+
+	public long getCacheTime() {
+		return cacheTime;
+	}
+
+	public void setCacheTime(long cacheTime) {
+		this.cacheTime = cacheTime;
 	}
 }

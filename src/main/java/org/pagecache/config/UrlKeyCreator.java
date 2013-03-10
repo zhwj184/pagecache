@@ -10,15 +10,15 @@ import java.util.Map;
 
 public class UrlKeyCreator {
 
-	public static String getUrlKey(String url, Map<String, String[]> params) {
+	public static String getUrlKey(String url, String urlPattern, Map<String, String[]> params) {
 		if (url == null || url.isEmpty()) {
 			throw new IllegalArgumentException("url must not be null");
 		}
 		StringBuilder sb = new StringBuilder(url);
 		List<String> includeParams = PageCacheGlobalConfig
-				.getUrlIncludeParams().get(url);
+				.getUrlIncludeParams().get(urlPattern);
 		List<String> excludeParams = PageCacheGlobalConfig
-				.getUrlExcludeParams().get(url);
+				.getUrlExcludeParams().get(urlPattern);
 		String paramsKey = "";
 		if (includeParams != null) {
 			paramsKey = getIncludeParamsKey(params, includeParams);
