@@ -16,36 +16,36 @@ cacheStoreParams：对应cacheStore的缓存策略类参数列表，参数之间
 
 
 
-  <filter>
-		<filter-name>pageCacheFilter</filter-name>
-		<filter-class>org.pagecache.servlet.PageCacheFilter</filter-class>
-		<init-param>
-			<param-name>urlPattern</param-name>
-			<param-value>/pageTest/plugin/[a-zA-z0-9]+.htm[lL],/pageTest/plugin3/[a-zA-z0-9]+.htm[lL]</param-value>
-		</init-param>
-		<init-param>
-			<param-name>cacheExpireTime</param-name>
-			<param-value>50,40</param-value>
-		</init-param>
-		<init-param>
-			<param-name>includeParams</param-name>
-			<param-value>id,name;brandId,brandName</param-value>
-		</init-param>
-		<init-param>
-			<param-name>excludeParams</param-name>
-			<param-value>tracelog;tracelog</param-value>
-		</init-param>
-		<init-param>
-			<param-name>cacheStore</param-name>
-			<param-value>org.pagecache.cache.SimpleLRUCacheStore</param-value>
-		</init-param>	
-				<init-param>
-			<param-name>cacheStoreParams</param-name>
-			<param-value>cachesize:5</param-value>
-		</init-param>			
-	</filter>
+<filter>
+	<filter-name>pageCacheFilter</filter-name>
+	<filter-class>org.pagecache.servlet.PageCacheFilter</filter-class>
+	<init-param>
+		<param-name>urlPattern</param-name>
+		<param-value>/pageTest/plugin/[a-zA-z0-9]+.htm[lL],/pageTest/plugin3/[a-zA-z0-9]+.htm[lL]</param-value>
+	</init-param>
+	<init-param>
+		<param-name>cacheExpireTime</param-name>
+		<param-value>50,40</param-value>
+	</init-param>
+	<init-param>
+		<param-name>includeParams</param-name>
+		<param-value>id,name;brandId,brandName</param-value>
+	</init-param>
+	<init-param>
+		<param-name>excludeParams</param-name>
+		<param-value>tracelog;tracelog</param-value>
+	</init-param>
+	<init-param>
+		<param-name>cacheStore</param-name>
+		<param-value>org.pagecache.cache.SimpleLRUCacheStore</param-value>
+	</init-param>	
+			<init-param>
+		<param-name>cacheStoreParams</param-name>
+		<param-value>cachesize:5</param-value>
+	</init-param>			
+</filter>
 
-	<filter-mapping>
-		<filter-name>pageCacheFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+<filter-mapping>
+	<filter-name>pageCacheFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
