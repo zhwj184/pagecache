@@ -15,14 +15,13 @@ cacheStore：缓存策略，这里提供基本本地的缓存LRU实现SimpleLRUC
 cacheStoreParams：对应cacheStore的缓存策略类参数列表，参数之间用；号分隔，参数名和参数值用：分隔，在init参数中可以根据参数做一些初始化工作；
 
 
-<?xml version="1.0" encoding="GB18030"?>
 
 <filter>
 	<filter-name>pageCacheFilter</filter-name>
 	<filter-class>org.pagecache.servlet.PageCacheFilter</filter-class>
 	<init-param>
 		<param-name>urlPattern</param-name>
-		<param-value>/pageTest/plugin/[a-zA-z0-9]+.htm[lL],/pageTest/plugin3/[a-zA-z0-9]+.htm[lL]</param-value>
+	
 	</init-param>
 	<init-param>
 		<param-name>cacheExpireTime</param-name>
