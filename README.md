@@ -16,12 +16,12 @@ cacheStoreParams：对应cacheStore的缓存策略类参数列表，参数之间
 
 
 
-<filter>
+	<filter>
 	<filter-name>pageCacheFilter</filter-name>
 	<filter-class>org.pagecache.servlet.PageCacheFilter</filter-class>
 	<init-param>
 		<param-name>urlPattern</param-name>
-	
+		
 	</init-param>
 	<init-param>
 		<param-name>cacheExpireTime</param-name>
@@ -43,11 +43,10 @@ cacheStoreParams：对应cacheStore的缓存策略类参数列表，参数之间
 		<param-name>cacheStoreParams</param-name>
 		<param-value>cachesize:5</param-value>
 	</init-param>			
-</filter>
-
-<filter-mapping>
-	<filter-name>pageCacheFilter</filter-name>
-	<url-pattern>/*</url-pattern>
-</filter-mapping>
+	</filter>
+	<filter-mapping>
+		<filter-name>pageCacheFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 
