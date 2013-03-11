@@ -15,6 +15,7 @@ cacheStore：缓存策略，这里提供基本本地的缓存LRU实现SimpleLRUC
 cacheStoreParams：对应cacheStore的缓存策略类参数列表，参数之间用；号分隔，参数名和参数值用：分隔，在init参数中可以根据参数做一些初始化工作；
 
 
+
   <filter>
 		<filter-name>pageCacheFilter</filter-name>
 		<filter-class>org.pagecache.servlet.PageCacheFilter</filter-class>
