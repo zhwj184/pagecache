@@ -21,7 +21,7 @@ cacheStoreParams：对应cacheStore的缓存策略类参数列表，参数之间
 	<filter-class>org.pagecache.servlet.PageCacheFilter</filter-class>
 	<init-param>
 		<param-name>urlPattern</param-name>
-	
+		<param-value>/pageTest/plugin/[a-zA-z0-9]+.htm[lL],/pageTest/plugin3/[a-zA-z0-9]+.htm[lL]</param-value>
 	</init-param>
 	<init-param>
 		<param-name>cacheExpireTime</param-name>
