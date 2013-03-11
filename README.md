@@ -16,10 +16,7 @@ cacheStoreParams：对应cacheStore的缓存策略类参数列表，参数之间
 
 
 <?xml version="1.0" encoding="GB18030"?>
-<web-fragment version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd">
+
 <filter>
 	<filter-name>pageCacheFilter</filter-name>
 	<filter-class>org.pagecache.servlet.PageCacheFilter</filter-class>
@@ -53,5 +50,5 @@ cacheStoreParams：对应cacheStore的缓存策略类参数列表，参数之间
 	<filter-name>pageCacheFilter</filter-name>
 	<url-pattern>/*</url-pattern>
 </filter-mapping>
-</web-fragment>
+
 
