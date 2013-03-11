@@ -16,6 +16,7 @@ cacheStoreParams：对应cacheStore的缓存策略类参数列表，参数之间
 
 
 
+
   <filter>
 		<filter-name>pageCacheFilter</filter-name>
 		<filter-class>org.pagecache.servlet.PageCacheFilter</filter-class>
